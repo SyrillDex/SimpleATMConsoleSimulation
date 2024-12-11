@@ -32,6 +32,18 @@ public class Main {
                             response = "cancel";
                         }
                         break;
+                    case "2":
+                        if (info.checkPin(response)) {
+                            info.depositCash(response);
+                        }
+                        else {
+                            System.out.println("Your account is locked");
+                            response = "cancel";
+                        }
+                        break;
+                    case "3":
+                        System.out.println("For dev1");
+                        break;
                 }
 
             }while (!response.equals("cancel"));

@@ -10,31 +10,33 @@ public class CardInfo {
     private final String  accountName = "Syrill Dex Laguerta";
     double balance = 100000.00;
 
-    public int getPin() {
-        return pin;
-    }
-
-    public String getAccountName() {
-        return accountName;
-    }
-
     public boolean checkPin(String response) {
 
         int pinInputLimit = 3;
 
         while (pinInputLimit > 0){
 
-            System.out.println("Please enter your PIN");
-            response = scan.nextLine();
-            int pinInput = Integer.parseInt(response);
+            try {
+                System.out.println("Please enter your PIN");
+                response = scan.nextLine();
+                int pinInput = Integer.parseInt(response);
 
-            if (pinInput != pin){
+                if (pinInput != pin){
+                    pinInputLimit--;
+                    System.out.println("Wrong pin you have " + pinInputLimit + " tries left");
+                    System.out.println();
+                }
+                else {
+                    return true;
+                }
+            }
+            catch (NumberFormatException e) {
+                System.out.println("Please enter a valid pin");
                 pinInputLimit--;
                 System.out.println("Wrong pin you have " + pinInputLimit + " tries left");
+                System.out.println();
             }
-            else {
-                return true;
-            }
+
         }
         return false;
     }
@@ -46,5 +48,22 @@ public class CardInfo {
         System.out.println();
         System.out.println("Press Enter to make another transaction");
         scan.nextLine();
+    }
+
+    public void depositCash(String response){
+        System.out.println("Please enter the amount you want to deposit");
+        try {
+            response = scan.nextLine();
+            int amount = Integer.parseInt(response);
+
+            balance += amount;
+            System.out.println();
+            System.out.println("Your new balance is " + format.format(balance));
+            System.out.println();
+
+        }
+        catch (NumberFormatException e) {
+            System.out.println("Please enter a valid amount");
+        }
     }
 }
