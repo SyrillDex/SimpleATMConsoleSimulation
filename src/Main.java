@@ -40,9 +40,17 @@ public class Main {
                             System.out.println("Your account is locked");
                             response = "cancel";
                         }
+                        System.out.println();
                         break;
                     case "3":
-                        System.out.println("For dev1");
+                        if (info.checkPin(response)) {
+                            info.withdrawCash(response);
+                        }
+                        else {
+                            System.out.println("Your account is locked");
+                            response = "cancel";
+                        }
+                        System.out.println();
                         break;
                 }
 
