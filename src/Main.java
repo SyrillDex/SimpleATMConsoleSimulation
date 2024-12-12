@@ -26,21 +26,27 @@ public class Main {
           System.out.println("Transaction canceled. Please retrieve your card.");
           break;
         }
-        if (info.checkPin(response)) {
-          switch (response) {
-            case "1":
-              info.showBalance();
-              break;
-            case "2":
-              info.depositCash(response);
-              break;
-            case "3":
-              info.withdrawCash(response);
-              break;
+        if (response.equals("1") || response.equals("2") || response.equals("3")) {
+          if (info.checkPin(response)) {
+            switch (response) {
+              case "1":
+                info.showBalance();
+                break;
+              case "2":
+                info.depositCash(response);
+                break;
+              case "3":
+                info.withdrawCash(response);
+                break;
+            }
+          }  else {
+            System.out.println("Your account is locked.");
+            response = "cancel";
           }
-        }  else {
-          System.out.println("Your account is locked.");
-          response = "cancel";
+        }
+        else {
+          System.out.println("Please type a valid response");
+          System.out.println();
         }
 
       }while (!response.equals("cancel"));
